@@ -19,7 +19,7 @@ keypoints:
 - "Supervised and unsupervised learning are different machine learning techniques that are used for different purposes."
 - "PCA can help simplify data analysis."
 - "Clustering may reveal hidden patterns or groupings in the data."
-- "A confusion matrix is a tool that allows us to measure the performance of an algorithm."
+- "A cross table is a tool that allows us to measure the performance of an algorithm."
 output: html_document
 ---
 

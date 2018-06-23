@@ -88,6 +88,10 @@ class(df$X2)
 ```
 
 Calculate baseline model accuracy:
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+df$pred <- ifelse(df$X3 > 15, "M", "B")
+df$pred
+```
 
 ```{r}
 # Calculate accuracy

@@ -97,6 +97,44 @@ class(df$X2)
 
 Calculate baseline model accuracy:
 
+~~~
+  [1] "M" "M" "M" "B" "M" "B" "M" "B" "B" "B" "M" "M" "M" "M" "B" "B" "B"
+ [18] "M" "M" "B" "B" "B" "M" "M" "M" "M" "B" "M" "M" "M" "M" "B" "M" "M"
+ [35] "M" "M" "B" "B" "B" "B" "B" "B" "M" "B" "B" "M" "B" "B" "B" "B" "B"
+ [52] "B" "B" "M" "M" "B" "M" "B" "B" "B" "B" "B" "B" "B" "B" "B" "B" "B"
+ [69] "B" "B" "M" "B" "M" "B" "B" "M" "B" "M" "M" "B" "B" "B" "M" "M" "B"
+ [86] "M" "B" "M" "B" "B" "B" "M" "B" "B" "M" "M" "B" "B" "B" "B" "B" "B"
+[103] "B" "B" "B" "B" "B" "B" "M" "B" "B" "B" "B" "B" "B" "B" "B" "B" "M"
+[120] "M" "B" "M" "M" "B" "B" "B" "B" "M" "M" "M" "B" "M" "M" "M" "M" "B"
+[137] "B" "B" "B" "B" "B" "M" "B" "B" "B" "B" "B" "B" "B" "B" "B" "B" "B"
+[154] "B" "B" "B" "M" "M" "B" "B" "B" "M" "M" "B" "M" "B" "B" "M" "M" "B"
+[171] "B" "B" "M" "B" "B" "B" "B" "M" "B" "B" "M" "M" "M" "B" "M" "B" "M"
+[188] "B" "B" "B" "B" "B" "B" "B" "B" "B" "B" "M" "M" "B" "B" "M" "M" "B"
+[205] "B" "M" "B" "M" "B" "M" "M" "B" "M" "M" "B" "B" "B" "B" "M" "M" "B"
+[222] "B" "B" "M" "B" "B" "B" "B" "B" "B" "M" "B" "B" "M" "B" "B" "M" "M"
+[239] "B" "M" "B" "B" "B" "B" "M" "B" "B" "B" "B" "B" "M" "B" "M" "M" "M"
+[256] "B" "M" "M" "M" "M" "M" "M" "M" "M" "M" "M" "B" "B" "B" "B" "B" "B"
+[273] "M" "B" "M" "B" "B" "M" "B" "B" "M" "B" "M" "M" "B" "B" "B" "B" "B"
+[290] "B" "B" "B" "B" "B" "B" "B" "B" "B" "B" "B" "M" "B" "M" "B" "B" "B"
+[307] "B" "B" "B" "B" "B" "B" "B" "B" "B" "B" "B" "M" "B" "B" "B" "M" "B"
+[324] "M" "B" "B" "B" "B" "M" "M" "M" "B" "B" "B" "B" "M" "B" "M" "B" "M"
+[341] "B" "B" "B" "M" "B" "B" "B" "B" "B" "B" "B" "M" "M" "M" "B" "B" "B"
+[358] "B" "B" "B" "B" "B" "B" "M" "B" "M" "M" "B" "M" "M" "M" "M" "M" "M"
+[375] "B" "M" "B" "B" "B" "B" "B" "B" "B" "B" "B" "B" "B" "B" "B" "M" "B"
+[392] "B" "M" "M" "B" "B" "B" "B" "B" "B" "M" "B" "B" "B" "B" "B" "M" "B"
+[409] "M" "B" "B" "B" "B" "B" "M" "B" "B" "M" "B" "B" "B" "B" "B" "B" "B"
+[426] "B" "B" "B" "B" "B" "B" "B" "M" "M" "B" "B" "B" "B" "B" "B" "B" "M"
+[443] "B" "B" "M" "B" "M" "B" "B" "M" "B" "M" "B" "B" "B" "B" "B" "B" "B"
+[460] "B" "M" "M" "B" "B" "B" "B" "B" "B" "M" "B" "B" "B" "B" "B" "B" "B"
+[477] "B" "B" "B" "M" "B" "B" "B" "B" "M" "B" "B" "M" "B" "M" "B" "M" "M"
+[494] "B" "B" "B" "B" "B" "M" "M" "M" "B" "B" "M" "B" "B" "B" "B" "M" "M"
+[511] "B" "B" "B" "B" "M" "B" "M" "M" "B" "B" "B" "M" "B" "B" "B" "B" "B"
+[528] "B" "B" "B" "B" "B" "B" "M" "B" "M" "B" "B" "B" "B" "B" "B" "B" "B"
+[545] "B" "B" "B" "B" "B" "B" "B" "B" "B" "B" "B" "B" "B" "B" "B" "B" "B"
+[562] "B" "M" "M" "M" "M" "M" "M" "B"
+~~~
+{: .output}
+
 
 ~~~
 # Calculate accuracy
@@ -107,16 +145,34 @@ confusionMatrix(as.factor(df$pred), df$X2)
 
 
 ~~~
-Warning: Unknown or uninitialised column: 'pred'.
-~~~
-{: .error}
+Confusion Matrix and Statistics
 
-
-
+          Reference
+Prediction   B   M
+         B 345  51
+         M  12 161
+                                          
+               Accuracy : 0.8893          
+                 95% CI : (0.8606, 0.9139)
+    No Information Rate : 0.6274          
+    P-Value [Acc > NIR] : < 2.2e-16       
+                                          
+                  Kappa : 0.754           
+ Mcnemar's Test P-Value : 1.688e-06       
+                                          
+            Sensitivity : 0.9664          
+            Specificity : 0.7594          
+         Pos Pred Value : 0.8712          
+         Neg Pred Value : 0.9306          
+             Prevalence : 0.6274          
+         Detection Rate : 0.6063          
+   Detection Prevalence : 0.6960          
+      Balanced Accuracy : 0.8629          
+                                          
+       'Positive' Class : B               
+                                          
 ~~~
-Error in confusionMatrix.default(as.factor(df$pred), df$X2): The data must contain some levels that overlap the reference.
-~~~
-{: .error}
+{: .output}
 
 Now it's time to build an ever so slightly more complex model, a logistic regression.
 
@@ -174,28 +230,28 @@ Confusion Matrix and Statistics
 
           Reference
 Prediction   B   M
-         B  68 155
-         M 289  57
-                                         
-               Accuracy : 0.2197         
-                 95% CI : (0.1863, 0.256)
-    No Information Rate : 0.6274         
-    P-Value [Acc > NIR] : 1              
-                                         
-                  Kappa : -0.4792        
- Mcnemar's Test P-Value : 2.756e-10      
-                                         
-            Sensitivity : 0.1905         
-            Specificity : 0.2689         
-         Pos Pred Value : 0.3049         
-         Neg Pred Value : 0.1647         
-             Prevalence : 0.6274         
-         Detection Rate : 0.1195         
-   Detection Prevalence : 0.3919         
-      Balanced Accuracy : 0.2297         
-                                         
-       'Positive' Class : B              
-                                         
+         B 357   0
+         M   0 212
+                                     
+               Accuracy : 1          
+                 95% CI : (0.9935, 1)
+    No Information Rate : 0.6274     
+    P-Value [Acc > NIR] : < 2.2e-16  
+                                     
+                  Kappa : 1          
+ Mcnemar's Test P-Value : NA         
+                                     
+            Sensitivity : 1.0000     
+            Specificity : 1.0000     
+         Pos Pred Value : 1.0000     
+         Neg Pred Value : 1.0000     
+             Prevalence : 0.6274     
+         Detection Rate : 0.6274     
+   Detection Prevalence : 0.6274     
+      Balanced Accuracy : 1.0000     
+                                     
+       'Positive' Class : B          
+                                     
 ~~~
 {: .output}
 
@@ -323,7 +379,7 @@ print(rf_default)
 Random Forest 
 
 569 samples
- 30 predictor
+ 31 predictor
   2 classes: 'B', 'M' 
 
 No pre-processing
@@ -332,9 +388,9 @@ Summary of sample sizes: 511, 513, 512, 513, 513, 512, ...
 Resampling results:
 
   Accuracy   Kappa    
-  0.9619534  0.9178787
+  0.9625076  0.9193644
 
-Tuning parameter 'mtry' was held constant at a value of 5.567764
+Tuning parameter 'mtry' was held constant at a value of 5.656854
 ~~~
 {: .output}
 
@@ -356,30 +412,31 @@ print(rf_random)
 Random Forest 
 
 569 samples
- 30 predictor
+ 31 predictor
   2 classes: 'B', 'M' 
 
 No pre-processing
 Resampling: Cross-Validated (5 fold, repeated 3 times) 
-Summary of sample sizes: 455, 455, 456, 454, 456, 456, ... 
+Summary of sample sizes: 455, 456, 455, 456, 454, 456, ... 
 Resampling results across tuning parameters:
 
   mtry  Accuracy   Kappa    
-   3    0.9583394  0.9102776
-   6    0.9624640  0.9192591
-   8    0.9618740  0.9180146
-  13    0.9607147  0.9155130
-  14    0.9630641  0.9205452
-  15    0.9624844  0.9194248
-  16    0.9630539  0.9205476
-  17    0.9618944  0.9180928
-  19    0.9612892  0.9167922
-  20    0.9595399  0.9131125
-  22    0.9589549  0.9118536
-  28    0.9589755  0.9118622
+   2    0.9578156  0.9092135
+   6    0.9619042  0.9180916
+  12    0.9613194  0.9168014
+  15    0.9607345  0.9154082
+  16    0.9619092  0.9180466
+  18    0.9625044  0.9193323
+  19    0.9607242  0.9155330
+  21    0.9624992  0.9192701
+  23    0.9577897  0.9091203
+  24    0.9601598  0.9143988
+  25    0.9589697  0.9117203
+  28    0.9601341  0.9142834
+  30    0.9589696  0.9118957
 
 Accuracy was used to select the optimal model using the largest value.
-The final value used for the model was mtry = 14.
+The final value used for the model was mtry = 18.
 ~~~
 {: .output}
 
@@ -391,4 +448,4 @@ plot(rf_random)
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-unnamed-chunk-9-1.png" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" style="display: block; margin: auto;" />
+<img src="../fig/rmd-unnamed-chunk-10-1.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" style="display: block; margin: auto;" />
