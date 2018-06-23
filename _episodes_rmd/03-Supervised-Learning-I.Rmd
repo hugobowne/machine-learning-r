@@ -1,7 +1,8 @@
 ---
 title: 'Supervised Learning I: classification'
 author: "Hugo Bowne-Anderson, Jorge Perez de Acha Chavez"
-teaching: 30
+teaching: 20
+exercises: 10
 questions: 
 - "How can I apply supervised learning to a data set?"
 objectives: 
@@ -20,7 +21,7 @@ output: html_document
 source("../bin/chunk-options.R")
 ```
 
-```{r echo=FALSE, warning=FALSE, message=FALSE, error=FALSE, eval=FALSE}
+```{r echo=FALSE, warning=FALSE, message=FALSE, error=FALSE}
 library(tidyverse)
 library(kernlab)
 library(ddalpha)
@@ -77,7 +78,7 @@ Whoa: what do we mean by _model performance_ here? There are many _metrics_ to d
 
 We first need to change `df$X2`, the _target variable_, to a factor:
 
-```{r eval=FALSE}
+```{r}
 # What is the class of X2?
 class(df$X2)
 # Change it to a factor
@@ -88,7 +89,7 @@ class(df$X2)
 
 Calculate baseline model accuracy:
 
-```{r eval=FALSE}
+```{r}
 # Calculate accuracy
 confusionMatrix(as.factor(df$pred), df$X2)
 ```
@@ -108,7 +109,7 @@ Let's build a logistic regression. You can read more about how logistic works [h
 
 Now build that logreg model:
 
-```{r eval=FALSE}
+```{r}
 # Build model
 model <- glm(X2 ~ ., family = "binomial", df)
 # Predict probability on the same dataset
@@ -132,7 +133,7 @@ _Also_, don't worry about the warnings. See [here for why](https://stackoverflow
 _BUT_ this is the accuracy on the data that you trained the model on. This is not necessarily indicative of how the model will generalize to a dataset that it has never seen before, which is the purpose of building such models. For this reason, it is common to use a process called _train test split_ to train the model on a subset of your data and then to compute the accuracy on the test set.
 <!-- mention overfitting? --> 
 
-```{r eval=FALSE}
+```{r}
 # Set seed for reproducible results
 set.seed(42)
 # Train test split
@@ -172,7 +173,7 @@ We do this for each value of each hyperparameter that we're tuning and choose th
 
 You'll first build a random forest with a grid containing 1 hyperparameter to get a feel for it.
 
-```{r eval=FALSE}
+```{r}
 # Create model with default paramters
 control <- trainControl(method="repeatedcv", number=10, repeats=3)
 metric <- "Accuracy"
@@ -184,7 +185,7 @@ print(rf_default)
 
 Now try your hand at a random search:
 
-```{r eval=FALSE}
+```{r}
 # Random Search
 control <- trainControl(method="repeatedcv", number=5, repeats=3, search="random")
 mtry <- sqrt(ncol(df))
@@ -195,6 +196,6 @@ print(rf_random)
 
 And plot the results:
 
-```{r eval=FALSE}
+```{r}
 plot(rf_random)
 ```

@@ -3,7 +3,8 @@
 # Instead, please edit 02-Unsupervised-Learning.md in _episodes_rmd/
 title: 'Unsupervised Learning'
 author: "Hugo Bowne-Anderson, Jorge Perez de Acha Chavez"
-teaching: 60
+teaching: 45
+exercises: 15
 questions: 
 - "What is principal component analysis (PCA)?"
 - "How can I perform PCA in R?"

@@ -4,6 +4,7 @@
 title: 'Supervised Learning II: regression'
 author: "Hugo Bowne-Anderson, Jorge Perez de Acha Chavez"
 teaching: 30
+exercises: 10
 questions: 
 - "What if the target variable is numerical rather than categorical?"
 objectives: 
@@ -182,6 +183,13 @@ rmse
 {: .language-r}
 
 
+
+~~~
+[1] 4.024089
+~~~
+{: .output}
+
+
 ## Supervised Learning III: regularized regression
 
 When performing linear regression, instead of minimizing the MSE, you can add other constraints that will stop the model parameters from shooting up too high. Lasso regression and ridge regression are a few examples. Your instructor will write several equations on the board to explain these constraints and all the necessary information is also in [this glmnet vignette](https://web.stanford.edu/~hastie/glmnet/glmnet_alpha.html). You'll use the glmnet package to fit a lasso regression to the data:
@@ -218,7 +226,7 @@ print(cvfit$lambda.min)
 
 
 ~~~
-[1] 0.07583914
+[1] 0.02061754
 ~~~
 {: .output}
 

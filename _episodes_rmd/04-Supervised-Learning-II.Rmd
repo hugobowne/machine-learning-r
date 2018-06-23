@@ -2,6 +2,7 @@
 title: 'Supervised Learning II: regression'
 author: "Hugo Bowne-Anderson, Jorge Perez de Acha Chavez"
 teaching: 30
+exercises: 10
 questions: 
 - "What if the target variable is numerical rather than categorical?"
 objectives: 
@@ -97,7 +98,7 @@ rmse_full
 
 But recall that this may not signify the RMSE on a new dataset that the model has not seen. For this reason, you'll perform a test train split and compute the RMSE:
 
-```{r eval=FALSE}
+```{r}
 # Set seed for reproducible results
 set.seed(42)
 # Train test split
