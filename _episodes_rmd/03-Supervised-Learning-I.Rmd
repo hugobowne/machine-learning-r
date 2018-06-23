@@ -1,6 +1,7 @@
 ---
 title: 'Supervised Learning I: classification'
 author: "Hugo Bowne-Anderson, Jorge Perez de Acha Chavez"
+teaching: 30
 questions: 
 - "How can I apply supervised learning to a data set?"
 objectives: 
@@ -46,7 +47,7 @@ In this section, you'll attempt to predict tumour diagnosis based on geometrical
 
 > ## Discussion
 >
-> Look at your [pair plot]({{ page.root }}{% link _episodes/01-Introduction.md %}). What would a baseline model there be?
+> Look at your [pair plot]({{ page.root }}{% link _episodes/01-Loading_Exploring.md %}). What would a baseline model there be?
 >
 {: .discussion}
 

@@ -1,6 +1,6 @@
 ---
 title: 'Unsupervised Learning II: clustering'
-author: "Jorge Perez de Acha Chavez"
+author: "Hugo Bowne-Anderson, Jorge Perez de Acha Chavez"
 questions: 
 - "What is clustering?"
 objectives: 

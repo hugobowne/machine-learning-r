@@ -1,6 +1,6 @@
 ---
 title: 'Supervised Learning III: regularized regression'
-author: "Jorge Perez de Acha Chavez"
+author: "Hugo Bowne-Anderson, Jorge Perez de Acha Chavez"
 questions: 
 - "Are there any improvements to the regression algorithm?"
 objectives: 

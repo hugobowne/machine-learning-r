@@ -1,15 +1,22 @@
 ---
-title: 'Unsupervised Learning I: dimensionality reduction'
+title: 'Unsupervised Learning'
 author: "Hugo Bowne-Anderson, Jorge Perez de Acha Chavez"
+teaching: 60
 questions: 
 - "What is principal component analysis (PCA)?"
 - "How can I perform PCA in R?"
+- "What is clustering?"
 objectives: 
 - "Know the difference between supervised and unsupervised learning."
 - "Learn the advantages of doing dimensionality reduction on a dataset."
+- "Know the basics of clustering."
+- "Perform the k-means algorithm in R."
+- "Learn how to read a confusion matrix."
 keypoints: 
 - "Supervised and unsupervised learning are different machine learning techniques that are used for different purposes."
 - "PCA can help simplify data analysis."
+- "Clustering may reveal hidden patterns or groupings in the data."
+- "A confusion matrix is a tool that allows us to measure the performance of an algorithm."
 output: html_document
 ---
 
@@ -17,7 +24,7 @@ output: html_document
 source("../bin/chunk-options.R")
 ```
 
-```{r echo=FALSE, warning=FALSE, message=FALSE, error=FALSE, eval=FALSE}
+```{r echo=FALSE, warning=FALSE, message=FALSE, error=FALSE}
 library(tidyverse)
 library(kernlab)
 library(ddalpha)
@@ -56,7 +63,7 @@ Another form of *unsupervised learning*, is _dimensionality reduction_: in the b
 Principal component analysis  will extract the features with the largest variance. Here let's take the first two principal components and plot them, coloured by tumour diagnosis.
 
 
-```{r eval=FALSE}
+```{r}
 # PCA on data
 ppv_pca <- preProcess(df, method = c("center", "scale", "pca"))
 df_pc <- predict(ppv_pca, df)
@@ -73,3 +80,34 @@ ggplot(df_pc, aes(x = PC1, y = PC2, colour = X2)) + geom_point()
 {: .callout}
 
 You can essentially think about PCA as a form of compression. You can read more about PCA [here](https://www.datacamp.com/community/tutorials/data-science-techniques-dataframed#pca).
+
+
+## Unsupervised Learning II: clustering
+
+One popular technique in unsupervised learning is _clustering_. Essentially, this is the task of grouping your data points, based on something about them, such as closeness in space. What you're going to do is group the tumour data points into two clusters using an algorithm called k-means, which aims to cluster the data in order to minimize the variances of the clusters.
+
+Cluster your data points using k-means and then we'll compare the results to the actual labels that we know:
+
+```{r}
+# k-means
+km.out <- kmeans(df[,2:10], centers=2, nstart=20)
+summary(km.out)
+km.out$cluster
+```
+
+Now that you have a cluster for each tumour (clusters 1 and 2), you can see how well they coincide with the labels that you know. To do this you'll use a cool method called cross-tabulation: a cross-tab is a table that allows you to read off how many data points in clusters 1 and 2 were actually benign or malignant respectively.
+
+Let's do it:
+
+
+```{r}
+# Cross-tab of clustering & known labels
+CrossTable(df$X2, km.out$cluster)
+```
+
+> ## Discussion
+>
+> How well did the k-means do at clustering the tumour data?
+>
+{: .discussion}
+

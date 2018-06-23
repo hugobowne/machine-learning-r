@@ -1,6 +1,7 @@
 ---
-title: "Introduction"
+title: "Loading and exploring data"
 author: "Hugo Bowne-Anderson, Jorge Perez de Acha Chavez"
+teaching: 30
 questions: 
 - "What is Exploratory Data Analysis (EDA) and why is it useful?"
 - "How can I do EDA in R?"
@@ -16,23 +17,7 @@ output: html_document
 source("../bin/chunk-options.R")
 ```
 
-## Getting set up computationally
-
-First you'll install the necessary packages and then load them.
-
-```{r message=FALSE, warning=FALSE}
-# Run this cell to install & load the required packages
-# If you need to install them, uncomment the lines of code below
-#install.packages("tidyverse")
-#install.packages("kernlab")
-#install.packages("ddalpha")
-#install.packages("caret")
-#install.packages("GGally")
-#install.packages("gmodels")
-#install.packages("glmnet", repos = "http://cran.us.r-project.org")
-#install.packages("e1071")
-
-# Load packages
+```{r echo=FALSE, warning=FALSE, message=FALSE, error=FALSE}
 library(tidyverse)
 library(kernlab)
 library(ddalpha)
@@ -42,7 +27,10 @@ library(gmodels)
 library(glmnet)
 ```
 
-
+> ## Setting up
+> Make sure you have installed R and RStudio, and installed and loaded the necessary packages from the [Setup]({{ page.root }}{% link setup.md %}) section.
+>
+{: .prereq}
 
 ## Loading your data
 
