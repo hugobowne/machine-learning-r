@@ -68,12 +68,32 @@ We first need to change `df$X2`, the _target variable_, to a factor:
 ~~~
 # What is the class of X2?
 class(df$X2)
+~~~
+{: .language-r}
+
+
+
+~~~
+[1] "character"
+~~~
+{: .output}
+
+
+
+~~~
 # Change it to a factor
 df$X2 <- as.factor(df$X2)
 # What is the class of X2 now?
 class(df$X2)
 ~~~
 {: .language-r}
+
+
+
+~~~
+[1] "factor"
+~~~
+{: .output}
 
 Calculate baseline model accuracy:
 
@@ -83,6 +103,20 @@ Calculate baseline model accuracy:
 confusionMatrix(as.factor(df$pred), df$X2)
 ~~~
 {: .language-r}
+
+
+
+~~~
+Warning: Unknown or uninitialised column: 'pred'.
+~~~
+{: .error}
+
+
+
+~~~
+Error in confusionMatrix.default(as.factor(df$pred), df$X2): The data must contain some levels that overlap the reference.
+~~~
+{: .error}
 
 Now it's time to build an ever so slightly more complex model, a logistic regression.
 
@@ -103,6 +137,26 @@ Now build that logreg model:
 ~~~
 # Build model
 model <- glm(X2 ~ ., family = "binomial", df)
+~~~
+{: .language-r}
+
+
+
+~~~
+Warning: glm.fit: algorithm did not converge
+~~~
+{: .error}
+
+
+
+~~~
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+~~~
+{: .error}
+
+
+
+~~~
 # Predict probability on the same dataset
 p <- predict(model, df, type="response")
 # Convert probability to prediction "M" or "B"
@@ -112,6 +166,38 @@ pred <- ifelse(p > 0.50, "M", "B")
 confusionMatrix(as.factor(pred), df$X2)
 ~~~
 {: .language-r}
+
+
+
+~~~
+Confusion Matrix and Statistics
+
+          Reference
+Prediction   B   M
+         B  68 155
+         M 289  57
+                                         
+               Accuracy : 0.2197         
+                 95% CI : (0.1863, 0.256)
+    No Information Rate : 0.6274         
+    P-Value [Acc > NIR] : 1              
+                                         
+                  Kappa : -0.4792        
+ Mcnemar's Test P-Value : 2.756e-10      
+                                         
+            Sensitivity : 0.1905         
+            Specificity : 0.2689         
+         Pos Pred Value : 0.3049         
+         Neg Pred Value : 0.1647         
+             Prevalence : 0.6274         
+         Detection Rate : 0.1195         
+   Detection Prevalence : 0.3919         
+      Balanced Accuracy : 0.2297         
+                                         
+       'Positive' Class : B              
+                                         
+~~~
+{: .output}
 
 > ## Discussion
 >
@@ -137,6 +223,26 @@ df_train <- df[ inTraining,]
 df_test <- df[-inTraining,]
 # Fit model to train set
 model <- glm(X2 ~ ., family="binomial", df_train)
+~~~
+{: .language-r}
+
+
+
+~~~
+Warning: glm.fit: algorithm did not converge
+~~~
+{: .error}
+
+
+
+~~~
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+~~~
+{: .error}
+
+
+
+~~~
 # Predict on test set
 p <- predict(model, df_test, type="response")
 pred <- ifelse(p > 0.50, "M", "B")
@@ -145,6 +251,38 @@ pred <- ifelse(p > 0.50, "M", "B")
 confusionMatrix(as.factor(pred), df_test$X2)
 ~~~
 {: .language-r}
+
+
+
+~~~
+Confusion Matrix and Statistics
+
+          Reference
+Prediction  B  M
+         B 88  6
+         M  1 47
+                                        
+               Accuracy : 0.9507        
+                 95% CI : (0.9011, 0.98)
+    No Information Rate : 0.6268        
+    P-Value [Acc > NIR] : <2e-16        
+                                        
+                  Kappa : 0.8926        
+ Mcnemar's Test P-Value : 0.1306        
+                                        
+            Sensitivity : 0.9888        
+            Specificity : 0.8868        
+         Pos Pred Value : 0.9362        
+         Neg Pred Value : 0.9792        
+             Prevalence : 0.6268        
+         Detection Rate : 0.6197        
+   Detection Prevalence : 0.6620        
+      Balanced Accuracy : 0.9378        
+                                        
+       'Positive' Class : B             
+                                        
+~~~
+{: .output}
 
 
 ### Random Forests
@@ -179,6 +317,27 @@ print(rf_default)
 ~~~
 {: .language-r}
 
+
+
+~~~
+Random Forest 
+
+569 samples
+ 30 predictor
+  2 classes: 'B', 'M' 
+
+No pre-processing
+Resampling: Cross-Validated (10 fold, repeated 3 times) 
+Summary of sample sizes: 511, 513, 512, 513, 513, 512, ... 
+Resampling results:
+
+  Accuracy   Kappa    
+  0.9619534  0.9178787
+
+Tuning parameter 'mtry' was held constant at a value of 5.567764
+~~~
+{: .output}
+
 Now try your hand at a random search:
 
 
@@ -191,6 +350,39 @@ print(rf_random)
 ~~~
 {: .language-r}
 
+
+
+~~~
+Random Forest 
+
+569 samples
+ 30 predictor
+  2 classes: 'B', 'M' 
+
+No pre-processing
+Resampling: Cross-Validated (5 fold, repeated 3 times) 
+Summary of sample sizes: 455, 455, 456, 454, 456, 456, ... 
+Resampling results across tuning parameters:
+
+  mtry  Accuracy   Kappa    
+   3    0.9583394  0.9102776
+   6    0.9624640  0.9192591
+   8    0.9618740  0.9180146
+  13    0.9607147  0.9155130
+  14    0.9630641  0.9205452
+  15    0.9624844  0.9194248
+  16    0.9630539  0.9205476
+  17    0.9618944  0.9180928
+  19    0.9612892  0.9167922
+  20    0.9595399  0.9131125
+  22    0.9589549  0.9118536
+  28    0.9589755  0.9118622
+
+Accuracy was used to select the optimal model using the largest value.
+The final value used for the model was mtry = 14.
+~~~
+{: .output}
+
 And plot the results:
 
 
@@ -198,3 +390,5 @@ And plot the results:
 plot(rf_random)
 ~~~
 {: .language-r}
+
+<img src="../fig/rmd-unnamed-chunk-9-1.png" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" style="display: block; margin: auto;" />
