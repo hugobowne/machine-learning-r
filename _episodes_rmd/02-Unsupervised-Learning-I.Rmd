@@ -1,0 +1,75 @@
+---
+title: 'Unsupervised Learning I: dimensionality reduction'
+author: "Jorge Perez de Acha Chavez"
+questions: 
+- "What is principal component analysis (PCA)?"
+- "How can I perform PCA in R?"
+objectives: 
+- "Know the difference between supervised and unsupervised learning."
+- "Learn the advantages of doing dimensionality reduction on a dataset."
+keypoints: 
+- "Supervised and unsupervised learning are different machine learning techniques that are used for different purposes."
+- "PCA can help simplify data analysis."
+output: html_document
+---
+
+```{r setup, include=FALSE}
+source("../bin/chunk-options.R")
+```
+
+```{r echo=FALSE, warning=FALSE, message=FALSE, error=FALSE, eval=FALSE}
+library(tidyverse)
+library(kernlab)
+library(ddalpha)
+library(caret)
+library(GGally)
+library(gmodels)
+library(glmnet)
+
+df <- read_csv("https://archive.ics.uci.edu/ml/machine-learning-databases/breast-cancer-wisconsin/wdbc.data",col_names = FALSE)
+df <- df[2:32]
+
+ppv <- preProcess(df, method = c("center", "scale"))
+df_tr <- predict(ppv, df)
+
+
+```
+
+
+## Unsupervised Learning I: dimensionality reduction
+
+*Machine learning* is the science and art of giving computers the ability to learn to make decisions from data without being explicitly programmed.
+
+*Unsupervised learning*, in essence, is the machine learning task of uncovering hidden patterns and structures from unlabeled data. For example, a business may wish to group its customers into distinct categories based on their purchasing behavior without knowing in advance what these categories maybe. This is known as clustering, one branch of unsupervised learning.
+
+Aside: *Supervised learning*, which we'll get to soon enough, is the branch of machine learning that involves predicting labels, such as whether a tumour will be *benign* or *malignant*.
+
+Another form of *unsupervised learning*, is _dimensionality reduction_: in the breast cancer dataset, for example, there are too many features to keep track of. What if we could reduce the number of features yet still keep much of the information? 
+
+> ## Discussion
+>
+> Look at features X3 and X5. Do you think we could reduce them to one feature and keep much of the information?
+>
+{: .discussion}
+
+
+Principal component analysis  will extract the features with the largest variance. Here let's take the first two principal components and plot them, coloured by tumour diagnosis.
+
+
+```{r eval=FALSE}
+# PCA on data
+ppv_pca <- preProcess(df, method = c("center", "scale", "pca"))
+df_pc <- predict(ppv_pca, df)
+# Plot 1st 2 principal components
+ggplot(df_pc, aes(x = PC1, y = PC2, colour = X2)) + geom_point()
+```
+
+> ## Note
+>
+> What PCA essentially does is the following:
+> 1. The first step of PCA is to decorrelate your data and this corresponds to a linear transformation of the vector space your data lie in;
+> 2. The second step is the actual dimension reduction; what is really happening is that your decorrelation step (the first step above) transforms the features into new and uncorrelated features; this second step then chooses the features that contain most of the information about the data (you'll formalize this soon enough).
+>
+{: .callout}
+
+You can essentially think about PCA as a form of compression. You can read more about PCA [here](https://www.datacamp.com/community/tutorials/data-science-techniques-dataframed#pca).

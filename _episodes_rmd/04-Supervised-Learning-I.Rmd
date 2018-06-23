@@ -1,0 +1,199 @@
+---
+title: 'Supervised Learning I: classification'
+author: "Jorge Perez de Acha Chavez"
+questions: 
+- "How can I apply supervised learning to a data set?"
+objectives: 
+- "Know the basic Machine Learning terminology."
+- "Build a model to predict a categorical target variable."
+- "Apply logistic regression and random forests algorithms to a data set and compare them."
+- "Learn the importance of separating data into training and test sets."
+keypoints: 
+- "The _target variable_ is the variable of interest, while the rest of the variables are known as _features_ or _predictor variables_."
+- "Separate your data set into training and test sets to avoid overfitting."
+- "Logistic regression and random forests can be used to predict categorical variables."
+output: html_document
+---
+
+```{r setup, include=FALSE}
+source("../bin/chunk-options.R")
+```
+
+```{r echo=FALSE, warning=FALSE, message=FALSE, error=FALSE, eval=FALSE}
+library(tidyverse)
+library(kernlab)
+library(ddalpha)
+library(caret)
+library(GGally)
+library(gmodels)
+library(glmnet)
+
+df <- read_csv("https://archive.ics.uci.edu/ml/machine-learning-databases/breast-cancer-wisconsin/wdbc.data",col_names = FALSE)
+df <- df[2:32]
+
+ppv <- preProcess(df, method = c("center", "scale"))
+df_tr <- predict(ppv, df)
+
+
+```
+
+## Supervised Learning I: classification
+
+
+As mentioned in passing above: *Supervised learning*, is the branch of machine learning that involves predicting labels, such as whether a tumour will be *benign* or *malignant*.
+
+In this section, you'll attempt to predict tumour diagnosis based on geometrical measurements.
+
+> ## Discussion
+>
+> Look at your [pair plot]({{ page.root }}{% link _episodes/01-Introduction.md %}). What would a baseline model there be?
+>
+{: .discussion}
+
+> ## Exercise
+>
+> Build a model that predicts diagnosis based on whether `X3 > 15` or something similar.
+>> ## Solution
+>> ```{r eval=FALSE}
+>> # Build baseline model
+>>df$pred <- ifelse(df$X3 > 15, "M", "B")
+>>df$pred
+>>```
+>{: .solution}
+{: .challenge}
+
+This is not a great model but it does give us a baseline: any model that we build later needs to perform better than this one.
+
+Whoa: what do we mean by _model performance_ here? There are many _metrics_ to determine model performance and here we'll use _accuracy_, the percentage of the data that the model got correct.
+
+> ## Note on terminology
+>
+> - The _target variable_ is the one you are trying to predict;
+> - Other variables are known as _features_ (or _predictor variables_).
+>
+{: .callout}
+
+
+We first need to change `df$X2`, the _target variable_, to a factor:
+
+```{r eval=FALSE}
+# What is the class of X2?
+class(df$X2)
+# Change it to a factor
+df$X2 <- as.factor(df$X2)
+# What is the class of X2 now?
+class(df$X2)
+```
+
+Calculate baseline model accuracy:
+
+```{r eval=FALSE}
+# Calculate accuracy
+confusionMatrix(as.factor(df$pred), df$X2)
+```
+
+Now it's time to build an ever so slightly more complex model, a logistic regression.
+
+### Logistic regression
+
+Let's build a logistic regression. You can read more about how logistic works [here](https://www.datacamp.com/community/tutorials/data-science-techniques-dataframed#logistic) and the instructor may show you some motivating and/or explanatory equations on the white/chalk-board. What's important to know is that _logistic regression_ is used for classification problems (such as our case of predicting whether a tumour is benign or malignant).
+
+> ## Note on logistic regression
+>
+> Logistic regression, or logreg, outputs a probability, which you'll then convert to a prediction.
+>
+{: .callout}
+
+
+Now build that logreg model:
+
+```{r eval=FALSE}
+# Build model
+model <- glm(X2 ~ ., family = "binomial", df)
+# Predict probability on the same dataset
+p <- predict(model, df, type="response")
+# Convert probability to prediction "M" or "B"
+pred <- ifelse(p > 0.50, "M", "B")
+
+# Create confusion matrix
+confusionMatrix(as.factor(pred), df$X2)
+```
+
+> ## Discussion
+>
+> From the above, can you say what the model accuracy is? 
+>
+{: .discussion}
+
+_Also_, don't worry about the warnings. See [here for why](https://stackoverflow.com/questions/8596160/why-am-i-getting-algorithm-did-not-converge-and-fitted-prob-numerically-0-or).
+
+
+_BUT_ this is the accuracy on the data that you trained the model on. This is not necessarily indicative of how the model will generalize to a dataset that it has never seen before, which is the purpose of building such models. For this reason, it is common to use a process called _train test split_ to train the model on a subset of your data and then to compute the accuracy on the test set.
+<!-- mention overfitting? --> 
+
+```{r eval=FALSE}
+# Set seed for reproducible results
+set.seed(42)
+# Train test split
+inTraining <- createDataPartition(df$X2, p = .75, list=FALSE)
+# Create train set
+df_train <- df[ inTraining,]
+# Create test set
+df_test <- df[-inTraining,]
+# Fit model to train set
+model <- glm(X2 ~ ., family="binomial", df_train)
+# Predict on test set
+p <- predict(model, df_test, type="response")
+pred <- ifelse(p > 0.50, "M", "B")
+
+# Create confusion matrix
+confusionMatrix(as.factor(pred), df_test$X2)
+```
+
+
+### Random Forests
+
+This caret API is so cool you can use it for lots of models. You'll build random forests below. Before describing random forests, you'll need to know a bit about decision tree classifiers. Decision trees allow you to classify data points (also known as "target variables", for example, benign or malignant tumor) based on feature variables (such as geometric measurements of tumors). See [here](http://res.cloudinary.com/dyd911kmh/image/upload/f_auto,q_auto:best/v1519834394/bc_fdf2rr.png) for an example. The depth of the tree is known as a _hyperparameter_, which means a parameter you need to decide before you fit the model to the data. You can read more about decision trees [here](https://www.datacamp.com/community/tutorials/kaggle-tutorial-machine-learning). A _random forest_ is a collection of decision trees that fits different decision trees with different subsets of the data and gets them to vote on the label. This provides intuition behind random forests and you can find more technical details [here](https://en.wikipedia.org/wiki/Random_forest). 
+<!-- Definition of random forest is a bit confusing to me.  --> 
+
+Before you build your first random forest, there's a pretty cool alternative to train test split called _k-fold cross validation_ that we'll look into.
+
+
+#### Cross Validation
+
+To choose your random forest hyperparameter `max_depth`, for example, you'll use a variation on test train split called cross validation.
+
+We begin by splitting the dataset into 5 groups or _folds_ (see [here](http://res.cloudinary.com/dyd911kmh/image/upload/f_auto,q_auto:best/v1514303215/cv_raxrt7.png), for example). Then we hold out the first fold as a test set, fit our model on the remaining four folds, predict on the test set and compute the metric of interest. Next we hold out the second fold as our test set, fit on the remaining data, predict on the test set and compute the metric of interest. Then similarly with the third, fourth and fifth.
+
+As a result we get five values of accuracy, from which we can compute statistics of interest, such as the median and/or mean and 95% confidence intervals.
+
+We do this for each value of each hyperparameter that we're tuning and choose the set of hyperparameters that performs the best. This is called _grid search_ if we specify the hyperparameter values we wish to try, and called _random search_ if we search randomly through the hyperparameter space (see more [here](http://topepo.github.io/caret/random-hyperparameter-search.html)).
+
+You'll first build a random forest with a grid containing 1 hyperparameter to get a feel for it.
+
+```{r eval=FALSE}
+# Create model with default paramters
+control <- trainControl(method="repeatedcv", number=10, repeats=3)
+metric <- "Accuracy"
+mtry <- sqrt(ncol(df))
+tunegrid <- expand.grid(.mtry=mtry)
+rf_default <- train(X2~., data=df, method="rf", metric=metric, tuneGrid=tunegrid, trControl=control)
+print(rf_default)
+```
+
+Now try your hand at a random search:
+
+```{r eval=FALSE}
+# Random Search
+control <- trainControl(method="repeatedcv", number=5, repeats=3, search="random")
+mtry <- sqrt(ncol(df))
+rf_random <- train(X2~., data=df, method="rf", metric=metric, tuneLength=15, trControl=control)
+print(rf_random)
+
+```
+
+And plot the results:
+
+```{r eval=FALSE}
+plot(rf_random)
+```
