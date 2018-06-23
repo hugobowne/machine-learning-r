@@ -2,6 +2,7 @@
 title: 'Supervised Learning II: regression'
 author: "Hugo Bowne-Anderson, Jorge Perez de Acha Chavez"
 teaching: 30
+exercises: 10
 questions: 
 - "What if the target variable is numerical rather than categorical?"
 objectives: 

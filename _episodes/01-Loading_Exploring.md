@@ -3,7 +3,8 @@
 # Instead, please edit 01-Loading_Exploring.md in _episodes_rmd/
 title: "Loading and exploring data"
 author: "Hugo Bowne-Anderson, Jorge Perez de Acha Chavez"
-teaching: 30
+teaching: 20
+exercises: 10
 questions: 
 - "What is Exploratory Data Analysis (EDA) and why is it useful?"
 - "How can I do EDA in R?"

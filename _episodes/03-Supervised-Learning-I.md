@@ -3,7 +3,8 @@
 # Instead, please edit 03-Supervised-Learning-I.md in _episodes_rmd/
 title: 'Supervised Learning I: classification'
 author: "Hugo Bowne-Anderson, Jorge Perez de Acha Chavez"
-teaching: 30
+teaching: 20
+exercises: 10
 questions: 
 - "How can I apply supervised learning to a data set?"
 objectives: 

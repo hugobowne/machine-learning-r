@@ -4,6 +4,7 @@
 title: 'Supervised Learning II: regression'
 author: "Hugo Bowne-Anderson, Jorge Perez de Acha Chavez"
 teaching: 30
+exercises: 10
 questions: 
 - "What if the target variable is numerical rather than categorical?"
 objectives: 
@@ -218,7 +219,7 @@ print(cvfit$lambda.min)
 
 
 ~~~
-[1] 0.07583914
+[1] 0.05736953
 ~~~
 {: .output}
 
