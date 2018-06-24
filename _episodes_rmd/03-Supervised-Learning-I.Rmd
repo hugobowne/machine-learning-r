@@ -42,7 +42,7 @@ df_tr <- predict(ppv, df)
 ## Supervised Learning I: classification
 
 
-As mentioned in passing above: *Supervised learning*, is the branch of machine learning that involves predicting labels, such as whether a tumour will be *benign* or *malignant*.
+As mentioned in passing before: *Supervised learning*, is the branch of machine learning that involves predicting labels, such as whether a tumour will be *benign* or *malignant*.
 
 In this section, you'll attempt to predict tumour diagnosis based on geometrical measurements.
 
@@ -88,6 +88,9 @@ class(df$X2)
 ```
 
 Calculate baseline model accuracy:
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+df$pred <- ifelse(df$X3 > 15, "M", "B")
+```
 
 ```{r}
 # Calculate accuracy
