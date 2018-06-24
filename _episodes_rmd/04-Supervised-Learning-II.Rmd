@@ -42,7 +42,7 @@ gm %>% head()
 Plot life expectancy as a function of fertility:
 
 
-```{r}
+```{r plt_life_exp}
 ggplot(gm, aes(x=fertility, y=life)) + geom_point()
 ```
 
@@ -62,7 +62,7 @@ pred <- predict(mod, gm)
 Plot the original data, along with the linear regression:
 
 
-```{r}
+```{r plt_linreg}
 {plot(gm$fertility, gm$life)
 abline(mod)}
 ```

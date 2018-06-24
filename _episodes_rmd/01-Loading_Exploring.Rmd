@@ -78,7 +78,7 @@ df %>% head()
 Now there are too many features to plot so you'll plot the first 5 in a pair-plot:
 <!-- does this mean we're getting rid of features, or that we'll only plot the first five as opposed to the 32 -->
 
-```{r}
+```{r pair_plot_raw}
 # Pair-plot of first 5 features
 ggpairs(df[1:5], aes(colour=X2, alpha=0.4))
 ```
@@ -104,7 +104,7 @@ df_tr[1:5] %>% summary()
 
 Now plot the centered & scaled features:
 
-```{r}
+```{r pair_plot_preprocessed}
 # Pair-plot of transformed data
 ggpairs(df_tr[1:5], aes(colour=X2))
 ```

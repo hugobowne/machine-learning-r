@@ -82,7 +82,7 @@ ggplot(gm, aes(x=fertility, y=life)) + geom_point()
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-unnamed-chunk-3-1.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" style="display: block; margin: auto;" />
+<img src="../fig/rmd-plt_life_exp-1.png" title="plot of chunk plt_life_exp" alt="plot of chunk plt_life_exp" style="display: block; margin: auto;" />
 
 > ## Discussion
 >
@@ -109,7 +109,7 @@ abline(mod)}
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-unnamed-chunk-5-1.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" style="display: block; margin: auto;" />
+<img src="../fig/rmd-plt_linreg-1.png" title="plot of chunk plt_linreg" alt="plot of chunk plt_linreg" style="display: block; margin: auto;" />
 
 > ## Discussion
 >
@@ -204,7 +204,7 @@ plot(fit, label=TRUE)
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-unnamed-chunk-9-1.png" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" style="display: block; margin: auto;" />
+<img src="../fig/rmd-unnamed-chunk-7-1.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" style="display: block; margin: auto;" />
 
 > ## Discussion
 >
@@ -237,7 +237,7 @@ plot(cvfit)
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-unnamed-chunk-10-1.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" style="display: block; margin: auto;" />
+<img src="../fig/rmd-unnamed-chunk-8-1.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" style="display: block; margin: auto;" />
 
 ### Feature selection using lasso regression
 
@@ -253,7 +253,7 @@ plot(fit, label=TRUE)
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-unnamed-chunk-11-1.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" style="display: block; margin: auto;" />
+<img src="../fig/rmd-unnamed-chunk-9-1.png" title="plot of chunk unnamed-chunk-9" alt="plot of chunk unnamed-chunk-9" style="display: block; margin: auto;" />
 
 > ## Discussion
 >

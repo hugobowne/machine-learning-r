@@ -448,4 +448,4 @@ plot(rf_random)
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-unnamed-chunk-10-1.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" style="display: block; margin: auto;" />
+<img src="../fig/rmd-plt_random_forest-1.png" title="plot of chunk plt_random_forest" alt="plot of chunk plt_random_forest" style="display: block; margin: auto;" />

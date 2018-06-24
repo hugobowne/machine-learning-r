@@ -64,7 +64,7 @@ Another form of *unsupervised learning*, is _dimensionality reduction_: in the b
 Principal component analysis  will extract the features with the largest variance. Here let's take the first two principal components and plot them, coloured by tumour diagnosis.
 
 
-```{r}
+```{r pca}
 # PCA on data
 ppv_pca <- preProcess(df, method = c("center", "scale", "pca"))
 df_pc <- predict(ppv_pca, df)

@@ -58,7 +58,7 @@ ggplot(df_pc, aes(x = PC1, y = PC2, colour = X2)) + geom_point()
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-unnamed-chunk-2-1.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" style="display: block; margin: auto;" />
+<img src="../fig/rmd-pca-1.png" title="plot of chunk pca" alt="plot of chunk pca" style="display: block; margin: auto;" />
 
 > ## Note
 >

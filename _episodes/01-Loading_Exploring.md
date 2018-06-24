@@ -129,7 +129,7 @@ ggpairs(df[1:5], aes(colour=X2, alpha=0.4))
 ~~~
 {: .output}
 
-<img src="../fig/rmd-unnamed-chunk-4-1.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" style="display: block; margin: auto;" />
+<img src="../fig/rmd-pair_plot_raw-1.png" title="plot of chunk pair_plot_raw" alt="plot of chunk pair_plot_raw" style="display: block; margin: auto;" />
 
 > ## Discussion
 >
@@ -191,7 +191,7 @@ ggpairs(df_tr[1:5], aes(colour=X2))
 ~~~
 {: .output}
 
-<img src="../fig/rmd-unnamed-chunk-6-1.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" style="display: block; margin: auto;" />
+<img src="../fig/rmd-pair_plot_preprocessed-1.png" title="plot of chunk pair_plot_preprocessed" alt="plot of chunk pair_plot_preprocessed" style="display: block; margin: auto;" />
 
 > ## Discussion
 >

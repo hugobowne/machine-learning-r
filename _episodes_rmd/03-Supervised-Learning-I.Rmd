@@ -200,6 +200,6 @@ print(rf_random)
 
 And plot the results:
 
-```{r}
+```{r plt_random_forest}
 plot(rf_random)
 ```
