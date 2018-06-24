@@ -12,7 +12,7 @@ objectives:
 - "Learn the advantages of doing dimensionality reduction on a dataset."
 - "Know the basics of clustering."
 - "Perform the k-means algorithm in R."
-- "Learn how to read a confusion matrix."
+- "Learn how to read a cross table."
 keypoints: 
 - "Supervised and unsupervised learning are different machine learning techniques that are used for different purposes."
 - "PCA can help simplify data analysis."

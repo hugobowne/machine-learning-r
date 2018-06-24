@@ -26,7 +26,7 @@ output: html_document
 ## Supervised Learning I: classification
 
 
-As mentioned in passing above: *Supervised learning*, is the branch of machine learning that involves predicting labels, such as whether a tumour will be *benign* or *malignant*.
+As mentioned in passing before: *Supervised learning*, is the branch of machine learning that involves predicting labels, such as whether a tumour will be *benign* or *malignant*.
 
 In this section, you'll attempt to predict tumour diagnosis based on geometrical measurements.
 
@@ -134,6 +134,7 @@ Calculate baseline model accuracy:
 [562] "B" "M" "M" "M" "M" "M" "M" "B"
 ~~~
 {: .output}
+
 
 
 ~~~
@@ -448,4 +449,8 @@ plot(rf_random)
 ~~~
 {: .language-r}
 
+<<<<<<< HEAD
 <img src="../fig/rmd-plt_random_forest-1.png" title="plot of chunk plt_random_forest" alt="plot of chunk plt_random_forest" style="display: block; margin: auto;" />
+=======
+<img src="../fig/rmd-unnamed-chunk-10-1.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" style="display: block; margin: auto;" />
+>>>>>>> d6da79adcf3df06daaeb64013a804ff682f00f5f
